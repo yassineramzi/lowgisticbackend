@@ -31,7 +31,7 @@ services:
       - 5000:5000
     depends_on:
       - discovery-service
-      - crm-database
+      - lowgistic-database
     environment:
       - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
       - SPRING_PROFILES_ACTIVE=portainer
@@ -41,7 +41,7 @@ services:
       - 1001
     depends_on:
       - discovery-service
-      - crm-database
+      - lowgistic-database
     environment:
       - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
       - CONTAINER_NAME=management-1
@@ -53,7 +53,7 @@ services:
       - 1002
     depends_on:
       - discovery-service
-      - crm-database
+      - lowgistic-database
       - management-service-1
     environment:
       - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka

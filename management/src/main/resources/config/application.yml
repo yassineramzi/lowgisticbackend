@@ -42,9 +42,6 @@ multitenancy:
   master:
     liquibase:
       changeLog: classpath:db/changelog/management/master/changelog-master.xml
-  tenant:
-    liquibase:
-      changeLog: classpath:db/changelog/management/tenant/changelog-tenant.xml
 
 logging:
   level:
