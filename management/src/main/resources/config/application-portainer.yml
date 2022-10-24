@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: dbc:postgresql://lowgistic-database:5432/lowgistic_db
+    url: jdbc:postgresql://lowgistic-database:5432/lowgistic_db
     username: lowgistic_user
     password: lowgistic_p@5sWord
   jpa:
