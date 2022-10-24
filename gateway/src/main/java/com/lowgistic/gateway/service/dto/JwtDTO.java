@@ -13,6 +13,5 @@ public class JwtDTO {
     private Long id;
     private String username;
     private String email;
-    private SocieteDto societe;
     private List<String> roles;
 }

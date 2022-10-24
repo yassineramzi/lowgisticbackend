@@ -12,9 +12,6 @@
 		<module>discovery</module>
 		<module>gateway</module>
 		<module>management</module>
-		<module>settings</module>
-		<module>email</module>
-		<module>multitenancy</module>
 	</modules>
 	<properties>
 		<java.version>8</java.version>

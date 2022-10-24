@@ -1,7 +1,6 @@
 package com.lowgistic.gateway.service.impl;
 
 import com.lowgistic.gateway.service.dto.JwtDTO;
-import com.lowgistic.gateway.service.mapper.SocieteMapper;
 import com.lowgistic.gateway.domain.Role;
 import com.lowgistic.gateway.helper.JwtUtils;
 import com.lowgistic.gateway.repository.UtilisateurRepository;
@@ -23,19 +22,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UtilisateurRepository utilisateurRepository;
 
-    private final SocieteMapper societeMapper;
-
     @Autowired
     public AuthenticationServiceImpl(
             JwtUtils jwtUtils,
             PasswordEncoder passwordEncoder,
-            UtilisateurRepository utilisateurRepository,
-            SocieteMapper societeMapper
+            UtilisateurRepository utilisateurRepository
     ){
         this.jwtUtils = jwtUtils;
         this.passwordEncoder = passwordEncoder;
         this.utilisateurRepository = utilisateurRepository;
-        this.societeMapper = societeMapper;
     }
 
     @Override
@@ -51,7 +46,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                     utilisateur.getId(),
                                     utilisateur.getLogin(),
                                     utilisateur.getEmail(),
-                                    this.societeMapper.toDto(utilisateur.getSociete()),
                                     utilisateur.getRoles().stream().map(Role::getNomRole).map(Enum::name).collect(Collectors.toList()
                                     )
                             ));

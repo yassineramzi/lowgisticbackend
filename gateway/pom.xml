@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lowgistic</groupId>
-	<artifactId>lowgistic</artifactId>
+	<artifactId>gateway</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>lowgistic</name>
+	<name>gateway</name>
 	<description>Lowgistic Gateway</description>
 	<properties>
 		<java.version>8</java.version>
