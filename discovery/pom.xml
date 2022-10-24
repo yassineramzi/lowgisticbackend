@@ -77,7 +77,7 @@
 							<image>adoptopenjdk:11-jre-hotspot</image>
 						</from>
 						<to>
-							<image>yramzi2021/thinline_discovery</image>
+							<image>lowgisticmarket/discovery</image>
 							<tags>${project.version}</tags>
 						</to>
 						<container>
