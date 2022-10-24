@@ -20,7 +20,6 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 
     @Query(value="select distinct u from Utilisateur u " +
             "LEFT JOIN FETCH u.roles "+
-            "LEFT JOIN FETCH u.societe "+
             "where u.login = :login")
     Optional<Utilisateur> findByLogin(@Param("login") String login);
 
