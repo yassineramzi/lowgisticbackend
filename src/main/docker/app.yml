@@ -1,0 +1,66 @@
+version: '3'
+services:
+  lowgistic-frontend:
+    image: registry.hub.docker.com/lowgisticmarket/frontend:latest
+    ports:
+      - 81:80
+    environment:
+      VIRTUAL_HOST: www.lowgistic.com,www.lowgistic.us,lowgistic.com,lowgistic.us
+  lowgistic-database:
+    image: 'postgres:latest'
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: lowgistic_user
+      POSTGRES_PASSWORD: lowgistic_p@5sWord
+      POSTGRES_DB: lowgistic_db
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+  discovery-service:
+    image: registry.hub.docker.com/lowgisticmarket/discovery:1.0.0-SNAPSHOT
+    expose:
+      - 8761
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=discovery-service
+      - PORT=8761
+      - ZONE=http://discovery-service:8761/eureka/
+  api-gateway:
+    image: registry.hub.docker.com/lowgisticmarket/api_gateway:1.0.0-SNAPSHOT
+    ports:
+      - 5000:5000
+    depends_on:
+      - discovery-service
+      - crm-database
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - SPRING_PROFILES_ACTIVE=portainer
+  management-service-1:
+    image: registry.hub.docker.com/lowgisticmarket/ms_management:1.0.0-SNAPSHOT
+    expose:
+      - 1001
+    depends_on:
+      - discovery-service
+      - crm-database
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=management-1
+      - PORT=1001
+      - SPRING_PROFILES_ACTIVE=portainer
+  management-service-2:
+    image: registry.hub.docker.com/lowgisticmarket/ms_management:1.0.0-SNAPSHOT
+    expose:
+      - 1002
+    depends_on:
+      - discovery-service
+      - crm-database
+      - management-service-1
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=management-2
+      - PORT=1002
+      - SPRING_PROFILES_ACTIVE=portainer
+networks:
+  default:
+    external:
+      name: nginx-proxy

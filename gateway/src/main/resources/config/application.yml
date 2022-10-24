@@ -1,0 +1,40 @@
+server:
+  port: ${PORT:5000}
+spring:
+  main:
+    banner-mode: "off"
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: management
+          uri: lb://MANAGEMENT-API
+          predicates:
+            - Path=/api/management/**
+          filters:
+            - RewritePath=/api/management(?<segment>/?.*), $\{segment}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
+
+crmthinline:
+  app:
+    jwtSecret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    jwtExpirationMs: 86400000
+    password:
+      encoder:
+        secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+        iteration: 33
+        keylength: 256

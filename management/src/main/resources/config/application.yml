@@ -1,0 +1,54 @@
+info:
+  app:
+    name: ${spring.application.name}
+
+server:
+  port: ${PORT:8001}
+
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: management-api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka/}
+    should-use-dns: false
+  instance:
+    preferIpAddress: true
+
+crmthinline:
+  app:
+    jwtSecret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    jwtExpirationMs: 86400000
+    password:
+      encoder:
+        secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+        iteration: 33
+        keylength: 256
+
+multitenancy:
+  master:
+    liquibase:
+      changeLog: classpath:db/changelog/management/master/changelog-master.xml
+  tenant:
+    liquibase:
+      changeLog: classpath:db/changelog/management/tenant/changelog-tenant.xml
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core : TRACE
