@@ -12,6 +12,8 @@ spring:
     name: email-service
   kafka:
     bootstrap-servers: lowgistic-kafka:9092
+    topic:
+      userRegistered: USER_REGISTERED_TOPIC
   mail:
     username: lowgisticmarket@gmail.com
     password: Lowgisticmarket2022
