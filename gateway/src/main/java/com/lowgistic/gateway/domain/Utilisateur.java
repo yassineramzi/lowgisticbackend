@@ -17,37 +17,28 @@ import java.util.Set;
 @EqualsAndHashCode
 @Table(name = "utilisateur",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "login"),
                 @UniqueConstraint(columnNames = "email")
         })
 @DynamicUpdate
 public class Utilisateur {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name="nom")
-    private String nom;
-
-    @Column(name="prenom")
-    private String prenom;
-
-    @Column(name="login")
-    private String login;
-
-    @Column(name="password")
-    private String password;
-
-    @NotBlank
-    @Email
-    @Column(name="email")
-    private String email;
-
-    @Column(name="fixe")
-    private String fixe;
-
-    @Column(name="mobile")
-    private String mobile;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+    
+        private String nom;
+    
+        private String prenom;
+    
+        private String email;
+    
+        private String telephone;
+    
+        private String pays;
+    
+        private String password;
+    
+        @Column(name="type_profil")
+        private String typeProfil;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "utilisateur_roles",

@@ -1,0 +1,44 @@
+info:
+  app:
+    name: ${spring.application.name}
+
+server:
+  port: ${PORT:2001}
+
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: email-service
+  kafka:
+    bootstrap-servers: lowgistic-kafka:9092
+  mail:
+    username: lowgisticmarket@gmail.com
+    password: Lowgisticmarket2022
+    host: smtp.gmail.com
+    port: 465
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          starttls:
+            enable: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka/}
+    should-use-dns: false
+  instance:
+    preferIpAddress: true

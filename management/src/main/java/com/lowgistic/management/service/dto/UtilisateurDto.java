@@ -4,6 +4,8 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,15 +17,15 @@ public class UtilisateurDto implements Serializable {
 
     private String prenom;
 
-    private String login;
-
     private String email;
 
-    private String fixe;
+    private String telephone;
 
-    private String mobile;
+    private String pays;
 
-    // @JsonIgnore
+    private String typeProfil;
+
+    @JsonIgnore
     private String password;
 
     private Set<RoleDto> roles;

@@ -10,6 +10,10 @@ spring:
     banner-mode: "off"
   application:
     name: management-api
+  kafka:
+    bootstrap-servers: lowgistic-kafka:9092
+    topic:
+      userRegistered: USER_REGISTERED_TOPIC
 
 management:
   endpoints:

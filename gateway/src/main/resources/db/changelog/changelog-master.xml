@@ -8,5 +8,4 @@
     <include file="/db/changelog/changes/added_entity_Utilisateur.xml" relativeToChangelogFile="false"/>
     <include file="/db/changelog/changes/added_entity_Roles.xml" relativeToChangelogFile="false"/>
     <include file="/db/changelog/changes/added_entity_Utilisateur_Roles.xml" relativeToChangelogFile="false"/>
-    <include file="/db/changelog/changes/load_entity_Super_Admin_Role.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

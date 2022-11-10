@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://lowgistic-database:5432/lowgistic_db
+    username: lowgistic_user
+    password: lowgistic_p@5sWord
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false

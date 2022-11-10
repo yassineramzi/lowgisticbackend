@@ -2,11 +2,12 @@ package com.lowgistic.management.service.impl;
 
 import com.lowgistic.management.domain.Role;
 import com.lowgistic.management.domain.Utilisateur;
+import com.lowgistic.management.enums.ERole;
 import com.lowgistic.management.helper.PasswordGenrator;
 import com.lowgistic.management.repository.RoleRepository;
 import com.lowgistic.management.repository.UtilisateurRepository;
-import com.lowgistic.management.service.EmailToBeSentService;
 import com.lowgistic.management.service.UtilisateurService;
+import com.lowgistic.management.service.dto.RoleDto;
 import com.lowgistic.management.service.dto.UtilisateurDto;
 import com.lowgistic.management.service.mapper.UtilisateurMapper;
 import org.slf4j.Logger;
@@ -31,22 +32,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final EmailToBeSentService emailToBeSentService;
-
     @Autowired
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository, UtilisateurMapper utilisateurMapper, PasswordEncoder passwordEncoder, EmailToBeSentService emailToBeSentService) {
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository, UtilisateurMapper utilisateurMapper, PasswordEncoder passwordEncoder) {
         this.utilisateurRepository = utilisateurRepository;
         this.roleRepository = roleRepository;
         this.utilisateurMapper = utilisateurMapper;
         this.passwordEncoder = passwordEncoder;
-        this.emailToBeSentService = emailToBeSentService;
     }
 
     @Override
     public UtilisateurDto create(UtilisateurDto utilisateurDto) throws Exception {
         log.info("Request to save Utilisateur : {}", utilisateurDto);
-        if(this.utilisateurRepository.existsByLoginOrEmail(utilisateurDto.getLogin(), utilisateurDto.getEmail())){
-            throw new Exception("Utilisateur existe dèjà avec login : "+utilisateurDto.getLogin()+" et/ou email : "+utilisateurDto.getEmail());
+        if(this.utilisateurRepository.existsByEmail(utilisateurDto.getEmail())){
+            throw new Exception("Utilisateur existe dèjà avec cet email : "+utilisateurDto.getEmail());
         }
         Utilisateur utilisateur = utilisateurMapper.toEntity(utilisateurDto);
         // Set password
@@ -54,6 +52,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         utilisateur.setPassword(this.passwordEncoder.encode(password));
         // Set role
         Set<Role> roles = new HashSet<>();
+        utilisateurDto.getRoles().add(new RoleDto(ERole.ROLE_ADMIN));
         utilisateurDto.getRoles().parallelStream().forEach(
                 roleDTO -> {
                     Optional<Role> optionalRole = this.roleRepository.findByNomRole(roleDTO.getNomRole());
@@ -66,13 +65,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         // Send mail
         UtilisateurDto returnedUtilisateur = utilisateurMapper.toDto(utilisateur);
         returnedUtilisateur.setPassword(password);
+        /* 
         this.emailToBeSentService.create(
-                "Création compte d'admnistrateur CRM DM21 pour le compte de la société "+returnedUtilisateur.getSociete().getNom(),
+                "Welcome on Lowgistic",
                 returnedUtilisateur.getEmail(),
                 returnedUtilisateur.getLogin(),
                 returnedUtilisateur.getPassword(),
-                returnedUtilisateur.getSociete().getNom()
-        );
+                returnedUtilisateur.getSociete().getRaisonSociale()
+        );*/
         return returnedUtilisateur;
     }
 }

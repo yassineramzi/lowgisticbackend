@@ -17,14 +17,4 @@
         </createTable>
     </changeSet>
 
-    <!-- Load data on utilisateur_roles -->
-    <changeSet id="2022_04_07_12_03" author="">
-        <loadData
-                file="db/changelog/data/utilisateur_roles.csv"
-                separator=";"
-                tableName="utilisateur_roles">
-            <column name="utilisateur_id" type="numeric"/>
-            <column name="roles_id" type="numeric"/>
-        </loadData>
-    </changeSet>
 </databaseChangeLog>

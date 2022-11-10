@@ -11,7 +11,6 @@ public class JwtDTO {
     private String token;
     private String type;
     private Long id;
-    private String username;
     private String email;
     private List<String> roles;
 }

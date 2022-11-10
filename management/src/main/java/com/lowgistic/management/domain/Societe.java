@@ -18,8 +18,12 @@ public class Societe implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nom")
-    private String nom;
+    @Column(name="raison_sociale")
+    private String raisonSociale;
+
+    private String adresse;
+
+    private String ice;
 
     @OneToMany( mappedBy="societe", cascade = CascadeType.ALL )
     private List<Utilisateur> utilisateurs = new ArrayList<>();

@@ -44,7 +44,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                     jwtUtils.generateToken(utilisateur),
                                     "Bearer",
                                     utilisateur.getId(),
-                                    utilisateur.getLogin(),
                                     utilisateur.getEmail(),
                                     utilisateur.getRoles().stream().map(Role::getNomRole).map(Enum::name).collect(Collectors.toList()
                                     )

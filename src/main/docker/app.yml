@@ -60,6 +60,18 @@ services:
       - CONTAINER_NAME=management-2
       - PORT=1002
       - SPRING_PROFILES_ACTIVE=portainer
+  email-service-1:
+    image: registry.hub.docker.com/lowgisticmarket/ms_email:1.0.0-SNAPSHOT
+    expose:
+      - 2001
+    depends_on:
+      - discovery-service
+      - lowgistic-database
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=management-1
+      - PORT=1001
+      - SPRING_PROFILES_ACTIVE=portainer
 networks:
   default:
     external:

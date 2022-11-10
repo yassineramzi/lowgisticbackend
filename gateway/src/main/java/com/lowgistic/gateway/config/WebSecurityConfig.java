@@ -17,9 +17,6 @@ import reactor.core.publisher.Mono;
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class WebSecurityConfig {
-    private static final String ADMIN = "ADMIN";
-    private static final String SUPER_ADMIN = "SUPER_ADMIN";
-
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository;
 
@@ -44,9 +41,9 @@ public class WebSecurityConfig {
                  */
                 .pathMatchers("/api/authentication/login").permitAll()
                 /*
-                    API BO
+                    API Signup
                  */
-                .pathMatchers("/api/management/**").hasRole(SUPER_ADMIN)
+                .pathMatchers("/api/management/**").permitAll()
                 /*
                     Pour tout autre appel l'utilisateur doit être authentifié
                  */

@@ -11,5 +11,9 @@ import java.io.Serializable;
 public class SocieteDto implements Serializable {
     private Long id;
 
-    private String nom;
+    private String raisonSociale;
+
+    private String adresse;
+
+    private String ice;
 }

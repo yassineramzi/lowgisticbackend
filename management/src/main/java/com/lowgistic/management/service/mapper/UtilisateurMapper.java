@@ -23,7 +23,6 @@ public interface UtilisateurMapper extends EntityMapper<UtilisateurDto, Utilisat
     default void before(UtilisateurDto utilisateurDTO, @MappingTarget Utilisateur utilisateur) {
         utilisateur.setNom(WordUtils.capitalize(utilisateurDTO.getNom().toLowerCase()));
         utilisateur.setPrenom(WordUtils.capitalize(utilisateurDTO.getPrenom().toLowerCase()));
-        utilisateur.setLogin(utilisateurDTO.getLogin().toLowerCase());
         utilisateur.setEmail(utilisateurDTO.getEmail().toLowerCase());
     }
 

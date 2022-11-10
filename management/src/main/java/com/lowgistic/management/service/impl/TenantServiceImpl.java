@@ -17,7 +17,7 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public void createTenant(Societe societe) {
         Tenant tenant = new Tenant();
-        tenant.setNom(societe.getNom().replaceAll("\\s+","") );
+        tenant.setNom(societe.getRaisonSociale().replaceAll("\\s+","") );
         tenant.setSociete(societe);
         tenant.setStatus(EStatusTenant.NOT_CREATED);
         this.tenantRepository.save(tenant);
