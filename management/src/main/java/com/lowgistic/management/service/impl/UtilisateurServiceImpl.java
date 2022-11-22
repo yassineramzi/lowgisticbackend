@@ -6,6 +6,7 @@ import com.lowgistic.management.enums.ERole;
 import com.lowgistic.management.helper.PasswordGenrator;
 import com.lowgistic.management.repository.RoleRepository;
 import com.lowgistic.management.repository.UtilisateurRepository;
+import com.lowgistic.management.sender.Sender;
 import com.lowgistic.management.service.UtilisateurService;
 import com.lowgistic.management.service.dto.RoleDto;
 import com.lowgistic.management.service.dto.UtilisateurDto;
@@ -32,12 +33,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final Sender emailSender;
+
     @Autowired
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository, UtilisateurMapper utilisateurMapper, PasswordEncoder passwordEncoder) {
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, RoleRepository roleRepository, UtilisateurMapper utilisateurMapper, PasswordEncoder passwordEncoder, Sender emailSender) {
         this.utilisateurRepository = utilisateurRepository;
         this.roleRepository = roleRepository;
         this.utilisateurMapper = utilisateurMapper;
         this.passwordEncoder = passwordEncoder;
+        this.emailSender = emailSender;
     }
 
     @Override
@@ -65,14 +69,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         // Send mail
         UtilisateurDto returnedUtilisateur = utilisateurMapper.toDto(utilisateur);
         returnedUtilisateur.setPassword(password);
-        /* 
-        this.emailToBeSentService.create(
-                "Welcome on Lowgistic",
-                returnedUtilisateur.getEmail(),
-                returnedUtilisateur.getLogin(),
-                returnedUtilisateur.getPassword(),
-                returnedUtilisateur.getSociete().getRaisonSociale()
-        );*/
+        this.emailSender.send("USER_REGISTERED_TOPIC", returnedUtilisateur);
         return returnedUtilisateur;
     }
 }
