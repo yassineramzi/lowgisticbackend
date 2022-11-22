@@ -2,6 +2,7 @@ package com.lowgistic.management.service.dto;
 
 import lombok.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,7 +29,7 @@ public class UtilisateurDto implements Serializable {
     @JsonIgnore
     private String password;
 
-    private Set<RoleDto> roles;
+    private Set<RoleDto> roles = new HashSet<RoleDto>();
 
     private SocieteDto societe;
 }
