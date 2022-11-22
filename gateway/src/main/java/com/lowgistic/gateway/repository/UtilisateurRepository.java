@@ -15,18 +15,12 @@ import java.util.Optional;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
     @Query(value="select distinct u from Utilisateur u " +
             "LEFT JOIN FETCH u.roles "+
-            "where u.login = :login and u.password = :password")
-    Optional<Utilisateur> findByLoginAndPassword(@Param("login") String login, @Param("password") String password);
+            "where u.email = :email and u.password = :password")
+    Optional<Utilisateur> findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
     @Query(value="select distinct u from Utilisateur u " +
             "LEFT JOIN FETCH u.roles "+
-            "where u.login = :login")
-    Optional<Utilisateur> findByLogin(@Param("login") String login);
+            "where u.email = :email")
+    Optional<Utilisateur> findByEmail(@Param("email") String email);
 
-    Boolean existsByLoginOrEmail(String login, String email);
-
-    @Query(value="select CASE WHEN COUNT(u) > 0 THEN true ELSE false END from Utilisateur u "+
-            "where (u.login = :login and u.id <> :id) " +
-            "or (u.email = :email and u.id <> :id)")
-    Boolean existsByLoginAndIdOrEmailAndId(@Param("login") String login, @Param("email") String email, @Param("id") Long id);
 }

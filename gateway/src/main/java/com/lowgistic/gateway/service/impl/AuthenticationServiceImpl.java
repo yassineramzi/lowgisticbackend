@@ -37,7 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public Mono<JwtDTO> login(String login, String password) {
         AtomicReference<JwtDTO> jwtDTO = new AtomicReference<>();
         utilisateurRepository
-                .findByLoginAndPassword(login, this.passwordEncoder.encode(password))
+                .findByEmailAndPassword(login, this.passwordEncoder.encode(password))
                 .ifPresent(
                         utilisateur -> {
                             jwtDTO.set(new JwtDTO(
