@@ -44,7 +44,7 @@ public class Utilisateur {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_societe", referencedColumnName = "id", updatable = false)
     private Societe societe;
 

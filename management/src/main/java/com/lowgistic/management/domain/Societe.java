@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +23,4 @@ public class Societe implements Serializable {
 
     private String ice;
 
-    @OneToMany( mappedBy="societe", cascade = CascadeType.ALL )
-    private List<Utilisateur> utilisateurs = new ArrayList<>();
 }
