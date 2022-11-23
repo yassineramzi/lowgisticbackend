@@ -22,7 +22,7 @@ spring:
               packages: com.lowgistic.email.service.dto, com.lowgistic.management.service.dto
   mail:
     username: lowgisticmarket@gmail.com
-    password: Lowgisticmarket2022
+    password: kirmrolwwzbjfaew
     host: smtp.gmail.com
     port: 465
     protocol: smtp
