@@ -14,6 +14,12 @@ spring:
     bootstrap-servers: lowgistic-kafka:9092
     topic:
       userRegistered: USER_REGISTERED_TOPIC
+    consumer:
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.lowgistic.email.service.dto
   mail:
     username: lowgisticmarket@gmail.com
     password: Lowgisticmarket2022
