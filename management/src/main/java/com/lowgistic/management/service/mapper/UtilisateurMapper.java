@@ -6,6 +6,7 @@ import org.apache.commons.lang.WordUtils;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Mapper for the entity {@link Utilisateur} and its DTO {@link UtilisateurDto}.

@@ -5,7 +5,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +28,7 @@ public class Utilisateur {
     
         private String prenom;
     
+        @Email
         private String email;
     
         private String telephone;
