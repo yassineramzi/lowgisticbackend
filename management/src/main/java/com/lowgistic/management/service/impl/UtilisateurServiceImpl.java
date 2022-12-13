@@ -52,6 +52,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
         Utilisateur utilisateur = utilisateurMapper.toEntity(utilisateurDto);
         // Set password
+        String password = utilisateur.getPassword();
         utilisateur.setPassword(this.passwordEncoder.encode(utilisateur.getPassword()));
         // Set role
         Set<Role> roles = new HashSet<>();
