@@ -1,0 +1,8 @@
+id,name,translation_key,type
+1,Include shippement Insurrance,include_shippement_insurrance,WAREHOUSE
+2,Inside Pickup,inside_pickup,WAREHOUSE
+3,Inside Delivery,inside_delivery,WAREHOUSE
+4,White Glove Service,white_glove_service,WAREHOUSE
+5,Debris Removal,debris_removal,FREIGHT
+6,Packing/Unpacking Service,packing_unpacking_service,FREIGHT
+7,Loading/Unloading Assistance,loading_unloading_assistance,FREIGHT
