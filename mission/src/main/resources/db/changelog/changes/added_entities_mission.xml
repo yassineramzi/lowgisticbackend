@@ -1,0 +1,93 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Add table mission_option -->
+    <changeSet id="create_mission_option_table" author="yramzi">
+        <createTable tableName="mission_option">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="translation_key" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add table mission -->
+    <changeSet id="create_mission_table" author="yramzi">
+        <createTable tableName="mission">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="freight_from" type="varchar(255)"/>
+            <column name="freight_to" type="varchar(255)"/>
+            <column name="freight_type" type="varchar(255)"/>
+            <column name="freight_type_of_goods" type="varchar(255)"/>
+            <column name="freight_mission_start_date" type="date"/>
+            <column name="freight_mission_end_date" type="date"/>
+            <column name="warehousing_mission_start_date" type="date"/>
+            <column name="warehousing_mission_end_date" type="date"/>
+            <column name="warehousing_mission_city" type="varchar(255)"/>
+            <column name="pickup_address" type="varchar(255)"/>
+            <column name="pickup_contact_person_name" type="varchar(255)"/>
+            <column name="pickup_contact_person_phone" type="varchar(255)"/>
+            <column name="pickup_contact_person_email" type="varchar(255)"/>
+            <column name="is_pickup_loading_dock_available" type="boolean"/>
+            <column name="is_pickup_lift_gate_required" type="boolean"/>
+            <column name="pickup_special_instructions" type="varchar(255)"/>
+            <column name="delivery_address" type="varchar(255)"/>
+            <column name="delivery_contact_person_name" type="varchar(255)"/>
+            <column name="delivery_contact_person_phone" type="varchar(255)"/>
+            <column name="delivery_contact_person_email" type="varchar(255)"/>
+            <column name="is_delivery_loading_dock_available" type="boolean"/>
+            <column name="is_delivery_lift_gate_required" type="boolean"/>
+            <column name="delivery_special_instructions" type="varchar(255)"/>
+            <column name="number_of_units" type="integer"/>
+            <column name="shipement_weight" type="integer"/>
+            <column name="shipement_unit" type="varchar(255)"/>
+            <column name="shipement_height" type="integer"/>
+            <column name="shipement_length" type="integer"/>
+            <column name="shipement_width" type="integer"/>
+            <column name="shipement_volume_unit" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Add many-to-many relationship table -->
+    <changeSet id="create_mission_mission_option_table" author="yramzi">
+        <createTable tableName="mission_mission_option">
+            <column name="mission_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mission_option_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add foreign key constraints -->
+    <changeSet id="add_foreign_key_constraints" author="yramzi">
+        <addForeignKeyConstraint baseTableName="mission_mission_option"
+                                 baseColumnNames="mission_id"
+                                 referencedTableName="mission"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_mission_mission_option_mission"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="mission_mission_option"
+                                 baseColumnNames="mission_option_id"
+                                 referencedTableName="mission_option"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_mission_mission_option_mission_option"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>
