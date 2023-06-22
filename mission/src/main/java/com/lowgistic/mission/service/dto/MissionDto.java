@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -17,10 +17,10 @@ public class MissionDto implements Serializable{
     private String freightTo;
     private String freightType;
     private String freightTypeOfGoods;
-    private Date freightMissionStartDate;
-    private Date freightMissionEndDate;
-    private Date warehousingMissionStartDate;
-    private Date warehousingMissionEndDate;
+    private LocalDate freightMissionStartDate;
+    private LocalDate freightMissionEndDate;
+    private LocalDate warehousingMissionStartDate;
+    private LocalDate warehousingMissionEndDate;
     private String warehousingMissionCity;
     private String pickupAddress;
     private String pickupContactPersonName;
