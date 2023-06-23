@@ -16,6 +16,12 @@ spring:
             - Path=/api/management/**
           filters:
             - RewritePath=/api/management(?<segment>/?.*), $\{segment}
+        - id: mission
+          uri: lb://MISSION-API
+          predicates:
+            - Path=/api/mission/**
+          filters:
+            - RewritePath=/api/mission(?<segment>/?.*), $\{segment}
 management:
   endpoints:
     web:
@@ -29,12 +35,12 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
 
-crmthinline:
+lowgistic:
   app:
-    jwtSecret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    jwtSecret: ThisIsSecretForJWTHS512ZignatureAlgorithmThatMUSTHave64ByteLength
     jwtExpirationMs: 86400000
     password:
       encoder:
-        secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+        secret: ThisIsSecretForJWTHS512ZignatureAlgorithmThatMUSTHave64ByteLength
         iteration: 33
         keylength: 256

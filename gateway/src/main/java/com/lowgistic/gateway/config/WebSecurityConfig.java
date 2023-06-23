@@ -45,6 +45,10 @@ public class WebSecurityConfig {
                  */
                 .pathMatchers("/api/management/**").permitAll()
                 /*
+                    API Mission
+                 */
+                .pathMatchers("/api/mission/**").permitAll()
+                /*
                     Pour tout autre appel l'utilisateur doit être authentifié
                  */
                 .anyExchange().authenticated()

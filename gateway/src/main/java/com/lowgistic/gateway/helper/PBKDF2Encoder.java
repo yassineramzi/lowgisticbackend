@@ -13,13 +13,13 @@ import java.util.Base64;
 @Component
 public class PBKDF2Encoder implements PasswordEncoder {
 
-    @Value("${crmthinline.app.password.encoder.secret}")
+    @Value("${lowgistic.app.password.encoder.secret}")
     private String secret;
 
-    @Value("${crmthinline.app.password.encoder.iteration}")
+    @Value("${lowgistic.app.password.encoder.iteration}")
     private Integer iteration;
 
-    @Value("${crmthinline.app.password.encoder.keylength}")
+    @Value("${lowgistic.app.password.encoder.keylength}")
     private Integer keylength;
 
     /**

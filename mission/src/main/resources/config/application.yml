@@ -9,7 +9,7 @@ spring:
   main:
     banner-mode: "off"
   application:
-    name: medecins-api
+    name: mission-api
 
 management:
   endpoints:
