@@ -19,5 +19,7 @@ public class MissionOption {
     private Long id;
     private String name;
     private String translationKey;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 100)
     private EMissionOptionType type;
 }

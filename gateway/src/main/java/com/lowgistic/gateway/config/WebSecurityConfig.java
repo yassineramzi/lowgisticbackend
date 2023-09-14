@@ -43,11 +43,23 @@ public class WebSecurityConfig {
                 /*
                     API Signup
                  */
-                .pathMatchers("/api/management/**").permitAll()
+                .pathMatchers("/api/management/register").permitAll()
+                /*
+                    API Company
+                 */
+                .pathMatchers("/api/management/company/**").permitAll()
                 /*
                     API Mission
                  */
                 .pathMatchers("/api/mission/**").permitAll()
+                /*
+                    API Mission Response
+                 */
+                .pathMatchers("/api/mission-response/**").permitAll()
+                /*
+                    API Countries
+                 */
+                .pathMatchers("/api/countries/**").permitAll()
                 /*
                     Pour tout autre appel l'utilisateur doit être authentifié
                  */

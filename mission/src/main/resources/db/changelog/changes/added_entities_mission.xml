@@ -57,6 +57,10 @@
             <column name="shipement_length" type="integer"/>
             <column name="shipement_width" type="integer"/>
             <column name="shipement_volume_unit" type="varchar(255)"/>
+            <column name="company_id" type="integer"/>
+            <column name="status" type="varchar(100)"/>
+            <column name="is_warehouse_mission" type="boolean"/>
+            <column name="is_freight_mission" type="boolean"/>
         </createTable>
     </changeSet>
 

@@ -13,6 +13,9 @@
 		<module>gateway</module>
 		<module>management</module>
 		<module>email</module>
+		<module>mission</module>
+		<module>countries</module>
+		<module>mission-response</module>
 	</modules>
 	<properties>
 		<java.version>8</java.version>

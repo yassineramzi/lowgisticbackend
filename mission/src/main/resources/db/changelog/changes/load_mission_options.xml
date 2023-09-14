@@ -8,10 +8,10 @@
         <loadData file="db/changelog/data/mission-option.csv"
                   separator=","
                   tableName="mission_option">
-            <column name="id" type="bigint"/>
-            <column name="name" type="varchar(255)"/>
-            <column name="translation_key" type="varchar(255)"/>
-            <column name="type" type="varchar(255)"/>
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="translation_key" type="string"/>
+            <column name="type" type="string"/>
             <column name="id" type="numeric"/>
         </loadData>
     </changeSet>

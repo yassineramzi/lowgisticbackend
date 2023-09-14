@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!-- Load country options data from CSV -->
+    <changeSet id="load_countries_data" author="yramzi">
+        <loadData file="db/changelog/data/countries.csv"
+                  tableName="country"
+                  separator=",">
+            <column header="id" type="NUMERIC"/>
+            <column header="name" type="STRING"/>
+            <column header="currency" type="STRING"/>
+            <column header="emojiU" type="STRING"/>
+            <column header="iso3" type="STRING"/>
+            <column header="iso2" type="STRING"/>
+            <column header="numericCode" type="INT"/>
+            <column header="phoneCode" type="STRING"/>
+            <column header="capital" type="STRING"/>
+            <column header="currencyName" type="STRING"/>
+            <column header="currencySymbol" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

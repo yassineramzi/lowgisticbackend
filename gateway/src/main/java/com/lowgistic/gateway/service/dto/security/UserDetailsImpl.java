@@ -1,6 +1,6 @@
 package com.lowgistic.gateway.service.dto.security;
 
-import com.lowgistic.gateway.domain.Utilisateur;
+import com.lowgistic.gateway.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +28,7 @@ public class UserDetailsImpl implements UserDetails, Serializable {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(Utilisateur utilisateur) {
+    public static UserDetailsImpl build(User utilisateur) {
         List<GrantedAuthority> authorities = utilisateur.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getNomRole().name()))
                 .collect(Collectors.toList());

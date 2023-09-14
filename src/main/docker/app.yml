@@ -1,11 +1,31 @@
 version: '3'
 services:
+  lowgistic-zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    expose:
+      - 2181
+  lowgistic-kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - lowgistic-zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: lowgistic-zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://lowgistic-kafka:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - 9092
   lowgistic-frontend:
-    image: registry.hub.docker.com/lowgisticmarket/frontend:latest
+    image: lowgisticmarket/frontend:latest
     ports:
       - 81:80
-    environment:
-      VIRTUAL_HOST: www.lowgistic.com,www.lowgistic.us,lowgistic.com,lowgistic.us
+    #environment:
+      #VIRTUAL_HOST: www.lowgistic.com,www.lowgistic.us,lowgistic.com,lowgistic.us
   lowgistic-database:
     image: 'postgres:latest'
     expose:
@@ -17,7 +37,7 @@ services:
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
   discovery-service:
-    image: registry.hub.docker.com/lowgisticmarket/discovery:1.0.0-SNAPSHOT
+    image: lowgisticmarket/discovery:1.0.0-SNAPSHOT
     expose:
       - 8761
     environment:
@@ -26,7 +46,7 @@ services:
       - PORT=8761
       - ZONE=http://discovery-service:8761/eureka/
   api-gateway:
-    image: registry.hub.docker.com/lowgisticmarket/api_gateway:1.0.0-SNAPSHOT
+    image: lowgisticmarket/api_gateway:1.0.0-SNAPSHOT
     ports:
       - 5000:5000
     depends_on:
@@ -36,19 +56,21 @@ services:
       - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
       - SPRING_PROFILES_ACTIVE=portainer
   management-service-1:
-    image: registry.hub.docker.com/lowgisticmarket/ms_management:1.0.0-SNAPSHOT
+    image: lowgisticmarket/ms_management:1.0.0-SNAPSHOT
     expose:
       - 1001
     depends_on:
       - discovery-service
       - lowgistic-database
+      - lowgistic-kafka
+      - api-gateway
     environment:
       - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
       - CONTAINER_NAME=management-1
       - PORT=1001
       - SPRING_PROFILES_ACTIVE=portainer
   management-service-2:
-    image: registry.hub.docker.com/lowgisticmarket/ms_management:1.0.0-SNAPSHOT
+    image: lowgisticmarket/ms_management:1.0.0-SNAPSHOT
     expose:
       - 1002
     depends_on:
@@ -61,18 +83,56 @@ services:
       - PORT=1002
       - SPRING_PROFILES_ACTIVE=portainer
   email-service-1:
-    image: registry.hub.docker.com/lowgisticmarket/ms_email:1.0.0-SNAPSHOT
+    #image: registry.hub.docker.com/lowgisticmarket/ms_email:1.0.0-SNAPSHOT
+    image: lowgisticmarket/ms_email:1.0.0-SNAPSHOT
     expose:
       - 2001
     depends_on:
       - discovery-service
       - lowgistic-database
+      - lowgistic-kafka
     environment:
       - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
-      - CONTAINER_NAME=management-1
-      - PORT=1001
+      - CONTAINER_NAME=email-service-1
+      - PORT=2001
       - SPRING_PROFILES_ACTIVE=portainer
-networks:
-  default:
-    external:
-      name: nginx-proxy
+  mission-service-1:
+    image: lowgisticmarket/ms_mission:1.0.0-SNAPSHOT
+    expose:
+      - 3001
+    depends_on:
+      - discovery-service
+      - lowgistic-database
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=mission-service-1
+      - PORT=3001
+      - SPRING_PROFILES_ACTIVE=portainer
+  countries-service-1:
+    image: lowgisticmarket/ms_countries:1.0.0-SNAPSHOT
+    expose:
+      - 4001
+    depends_on:
+      - discovery-service
+      - lowgistic-database
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=countries-service-1
+      - PORT=3001
+      - SPRING_PROFILES_ACTIVE=portainer
+  mission-response-service-1:
+    image: lowgisticmarket/ms_mission_response:1.0.0-SNAPSHOT
+    expose:
+      - 5001
+    depends_on:
+      - discovery-service
+      - lowgistic-database
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://discovery-service:8761/eureka
+      - CONTAINER_NAME=countries-service-1
+      - PORT=3001
+      - SPRING_PROFILES_ACTIVE=portainer
+#networks:
+  #default:
+    #external:
+      #name: nginx-proxy

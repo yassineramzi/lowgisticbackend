@@ -1,22 +1,22 @@
 package com.lowgistic.management.service.mapper;
 
-import com.lowgistic.management.domain.Societe;
-import com.lowgistic.management.service.dto.SocieteDto;
+import com.lowgistic.management.domain.Company;
+import com.lowgistic.management.service.dto.CompanyDto;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {UtilisateurMapper.class})
-public interface SocieteMapper extends EntityMapper<SocieteDto, Societe>{
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
+public interface SocieteMapper extends EntityMapper<CompanyDto, Company>{
     @Override
-    SocieteDto toDto(Societe Societe);
+    CompanyDto toDto(Company Societe);
 
     @Override
-    Societe toEntity(SocieteDto SocieteDTO);
+    Company toEntity(CompanyDto SocieteDTO);
 
-    default Societe fromId(Long id) {
+    default Company fromId(Long id) {
         if (id == null) {
             return null;
         }
-        Societe Societe = new Societe();
+        Company Societe = new Company();
         Societe.setId(id);
         return Societe;
     }

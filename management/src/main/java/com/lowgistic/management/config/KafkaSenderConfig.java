@@ -14,7 +14,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.lowgistic.management.sender.Sender;
-import com.lowgistic.management.service.dto.UtilisateurDto;
+import com.lowgistic.management.service.dto.UserDto;
 
 @Configuration
 public class KafkaSenderConfig {
@@ -28,17 +28,16 @@ public class KafkaSenderConfig {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
-
         return props;
     }
 
     @Bean
-    public ProducerFactory<String, UtilisateurDto> producerFactory() {
+    public ProducerFactory<String, UserDto> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, UtilisateurDto> simpleKafkaTemplate() {
+    public KafkaTemplate<String, UserDto> simpleKafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

@@ -1,0 +1,29 @@
+info:
+  app:
+    name: ${spring.application.name}
+
+server:
+  port: ${PORT:9001}
+
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: countries-api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka/}
+    should-use-dns: false
+  instance:
+    preferIpAddress: true

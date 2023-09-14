@@ -1,5 +1,6 @@
 package com.lowgistic.mission.domain;
 
+import com.lowgistic.mission.enums.EStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -47,7 +48,6 @@ public class Mission {
     private Integer shipementLength;
     private Integer shipementWidth;
     private String shipementVolumeUnit;
-
     @ManyToMany
     @JoinTable(
             name = "mission_mission_option",
@@ -55,7 +55,11 @@ public class Mission {
             inverseJoinColumns = @JoinColumn(name = "mission_option_id")
     )
     private List<MissionOption> options;
-
-    // Constructors, getters, and setters
+    private Long companyId;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 100)
+    private EStatus status;
+    private boolean isWarehouseMission;
+    private boolean isFreightMission;
 }
 

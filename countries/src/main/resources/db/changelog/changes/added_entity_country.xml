@@ -1,0 +1,24 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="countries" author="yramzi">
+        <createTable tableName="country">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="currency" type="VARCHAR(255)"/>
+            <column name="emoji" type="VARCHAR(255)"/>
+            <column name="iso3" type="VARCHAR(255)"/>
+            <column name="iso2" type="VARCHAR(255)"/>
+            <column name="numeric_code" type="INTEGER"/>
+            <column name="phone_code" type="VARCHAR(255)"/>
+            <column name="capital" type="VARCHAR(255)"/>
+            <column name="currency_name" type="VARCHAR(255)"/>
+            <column name="currency_symbol" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

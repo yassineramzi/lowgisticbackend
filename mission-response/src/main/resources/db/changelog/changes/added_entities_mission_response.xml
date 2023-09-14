@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Add table mission_response_option -->
+    <changeSet id="create_mission_response_option_table" author="yramzi">
+        <createTable tableName="mission_response_option">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="mission_option_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mission_response_id" type="bigint">
+            </column>
+            <column name="commentary" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add table mission_response -->
+    <changeSet id="create_mission_response_table" author="yramzi">
+        <createTable tableName="mission_response">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="freight_price" type="bigint"/>
+            <column name="freight_price_commentary" type="varchar(1000)"/>
+            <column name="freight_incoterms_price" type="bigint"/>
+            <column name="freight_incoterms_commentary" type="varchar(1000)"/>
+            <column name="warehouse_location" type="varchar(255)"/>
+            <column name="storage_period" type="bigint"/>
+            <column name="storage_period_price" type="bigint"/>
+            <column name="storage_period_commentary" type="varchar(1000)"/>
+            <column name="franchise_storage_period" type="bigint"/>
+            <column name="create_date" type="date"/>
+            <column name="owner_id" type="bigint"/>
+            <column name="mission_id" type="bigint"/>
+            <column name="status" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

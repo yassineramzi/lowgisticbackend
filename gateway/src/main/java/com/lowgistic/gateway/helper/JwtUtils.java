@@ -1,7 +1,7 @@
 package com.lowgistic.gateway.helper;
 
 import com.lowgistic.gateway.domain.Role;
-import com.lowgistic.gateway.domain.Utilisateur;
+import com.lowgistic.gateway.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${crmthinline.app.jwtSecret}")
+    @Value("${lowgistic.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${crmthinline.app.jwtExpirationMs}")
+    @Value("${lowgistic.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     private KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS256);
@@ -48,7 +48,7 @@ public class JwtUtils {
         return getAllClaimsFromToken(token).getExpiration();
     }
 
-    public String generateToken(Utilisateur user) {
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", user.getRoles().stream().map(Role::getNomRole).collect(Collectors.toList()));
         return doGenerateToken(claims, user.getEmail());

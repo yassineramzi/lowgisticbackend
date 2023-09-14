@@ -32,7 +32,7 @@ eureka:
   instance:
     preferIpAddress: true
 
-crmthinline:
+lowgistic:
   app:
     jwtSecret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
     jwtExpirationMs: 86400000

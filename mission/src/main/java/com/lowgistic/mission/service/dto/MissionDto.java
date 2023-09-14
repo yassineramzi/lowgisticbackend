@@ -1,5 +1,6 @@
 package com.lowgistic.mission.service.dto;
 
+import com.lowgistic.mission.enums.EStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,5 +45,9 @@ public class MissionDto implements Serializable{
     private Integer shipementWidth;
     private String shipementVolumeUnit;
     private List<MissionOptionDto> options;
+    private Long companyId;
+    private EStatus status;
+    private boolean isWarehouseMission;
+    private boolean isFreightMission;
 }
 

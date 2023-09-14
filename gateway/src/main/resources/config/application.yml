@@ -22,6 +22,18 @@ spring:
             - Path=/api/mission/**
           filters:
             - RewritePath=/api/mission(?<segment>/?.*), $\{segment}
+        - id: countries
+          uri: lb://COUNTRIES-API
+          predicates:
+            - Path=/api/countries/**
+          filters:
+            - RewritePath=/api/countries(?<segment>/?.*), $\{segment}
+        - id: mission-response
+          uri: lb://MISSION-RESPONSE-API
+          predicates:
+            - Path=/api/mission-response/**
+          filters:
+            - RewritePath=/api/mission-response(?<segment>/?.*), $\{segment}
 management:
   endpoints:
     web:
@@ -37,10 +49,10 @@ eureka:
 
 lowgistic:
   app:
-    jwtSecret: ThisIsSecretForJWTHS512ZignatureAlgorithmThatMUSTHave64ByteLength
+    jwtSecret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
     jwtExpirationMs: 86400000
     password:
       encoder:
-        secret: ThisIsSecretForJWTHS512ZignatureAlgorithmThatMUSTHave64ByteLength
+        secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
         iteration: 33
         keylength: 256

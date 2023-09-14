@@ -3,7 +3,7 @@ package com.lowgistic.gateway.service.impl;
 import com.lowgistic.gateway.service.dto.JwtDTO;
 import com.lowgistic.gateway.domain.Role;
 import com.lowgistic.gateway.helper.JwtUtils;
-import com.lowgistic.gateway.repository.UtilisateurRepository;
+import com.lowgistic.gateway.repository.UserRepository;
 import com.lowgistic.gateway.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,32 +20,32 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final UtilisateurRepository utilisateurRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public AuthenticationServiceImpl(
             JwtUtils jwtUtils,
             PasswordEncoder passwordEncoder,
-            UtilisateurRepository utilisateurRepository
+            UserRepository userRepository
     ){
         this.jwtUtils = jwtUtils;
         this.passwordEncoder = passwordEncoder;
-        this.utilisateurRepository = utilisateurRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public Mono<JwtDTO> login(String login, String password) {
         AtomicReference<JwtDTO> jwtDTO = new AtomicReference<>();
-        utilisateurRepository
+        userRepository
                 .findByEmailAndPassword(login, this.passwordEncoder.encode(password))
                 .ifPresent(
-                        utilisateur -> {
+                        user -> {
                             jwtDTO.set(new JwtDTO(
-                                    jwtUtils.generateToken(utilisateur),
+                                    jwtUtils.generateToken(user),
                                     "Bearer",
-                                    utilisateur.getId(),
-                                    utilisateur.getEmail(),
-                                    utilisateur.getRoles().stream().map(Role::getNomRole).map(Enum::name).collect(Collectors.toList()
+                                    user.getId(),
+                                    user.getEmail(),
+                                    user.getRoles().stream().map(Role::getNomRole).map(Enum::name).collect(Collectors.toList()
                                     )
                             ));
                         }

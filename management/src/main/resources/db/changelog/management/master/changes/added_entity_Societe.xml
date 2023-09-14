@@ -6,7 +6,7 @@
 
     <property name="autoIncrement" value="true"/>
     <!--
-        Added the entity Societe.
+        Added the entity Company.
     -->
     <changeSet id="2022_05_06_12_21" author="">
         <createTable tableName="societe">

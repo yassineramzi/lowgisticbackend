@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Create CompanyInformationDto Table -->
+    <changeSet id="create-companyinformation-table" author="yramzi">
+        <createTable tableName="company_information">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="registre_commerce" type="VARCHAR(255)"/>
+            <column name="numero_agreement" type="VARCHAR(255)"/>
+            <column name="numero_police_assurance" type="VARCHAR(255)"/>
+            <column name="nombre_employes" type="INTEGER"/>
+            <column name="devise_facturation" type="VARCHAR(255)"/>
+            <column name="company_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create WarehouseDto Table -->
+    <changeSet id="create-warehouse-table" author="yramzi">
+        <createTable tableName="warehouse">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="superficie" type="DOUBLE"/>
+            <column name="security247" type="BOOLEAN"/>
+            <column name="access247" type="BOOLEAN"/>
+            <column name="bunded" type="BOOLEAN"/>
+            <column name="caged" type="BOOLEAN"/>
+            <column name="sprinklered" type="BOOLEAN"/>
+            <column name="alarmed" type="BOOLEAN"/>
+            <column name="patrolled" type="BOOLEAN"/>
+            <column name="fenced_yard" type="BOOLEAN"/>
+            <column name="cctv" type="BOOLEAN"/>
+            <column name="esft" type="BOOLEAN"/>
+            <column name="bulk_powder" type="BOOLEAN"/>
+            <column name="hazardous_chemicals" type="BOOLEAN"/>
+            <column name="bulk_liquid" type="BOOLEAN"/>
+            <column name="high_value" type="BOOLEAN"/>
+            <column name="lme" type="BOOLEAN"/>
+            <column name="wet_bonded" type="BOOLEAN"/>
+            <column name="dry_bonded" type="BOOLEAN"/>
+            <column name="container" type="BOOLEAN"/>
+            <column name="out_door" type="BOOLEAN"/>
+            <column name="rf_technology" type="BOOLEAN"/>
+            <column name="counter_balance" type="BOOLEAN"/>
+            <column name="crane" type="BOOLEAN"/>
+            <column name="reach_truck" type="BOOLEAN"/>
+            <column name="trailer_parking" type="BOOLEAN"/>
+            <column name="brc" type="BOOLEAN"/>
+            <column name="organic_food_fed" type="BOOLEAN"/>
+            <column name="mhra" type="BOOLEAN"/>
+            <column name="organic_farmers" type="BOOLEAN"/>
+            <column name="soil" type="BOOLEAN"/>
+            <column name="ukwa" type="BOOLEAN"/>
+            <column name="cbp_supply_chain_security" type="BOOLEAN"/>
+            <column name="company_information_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create TruckDto Table -->
+    <changeSet id="create-truck-table" author="yourname">
+        <createTable tableName="truck">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="immatriculation" type="VARCHAR(255)"/>
+            <column name="marque" type="VARCHAR(255)"/>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="year" type="VARCHAR(255)"/>
+            <column name="refrigeration" type="BOOLEAN"/>
+            <column name="lift_gates" type="BOOLEAN"/>
+            <column name="tie_downs" type="BOOLEAN"/>
+            <column name="cargo_partitions" type="BOOLEAN"/>
+            <column name="load_locks" type="BOOLEAN"/>
+            <column name="company_information_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Define Foreign Keys -->
+    <changeSet id="add-foreign-keys" author="yramzi">
+        <addForeignKeyConstraint
+                baseTableName="warehouse"
+                baseColumnNames="company_information_id"
+                constraintName="fk_warehouse_companyinformation"
+                referencedTableName="company_information"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="truck"
+                baseColumnNames="company_information_id"
+                constraintName="fk_truck_companyinformation"
+                referencedTableName="company_information"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

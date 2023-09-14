@@ -1,15 +1,16 @@
 package com.lowgistic.mission.service.impl;
 
 import com.lowgistic.mission.domain.Mission;
+import com.lowgistic.mission.enums.EStatus;
 import com.lowgistic.mission.repository.MissionRepositroy;
 import com.lowgistic.mission.service.MissionService;
 import com.lowgistic.mission.service.conditions.utils.VerificationUtilsService;
 import com.lowgistic.mission.service.conditions.verifiers.impl.MissionVerifiers;
 import com.lowgistic.mission.service.dto.MissionDto;
-import com.lowgistic.mission.service.dto.searchCriteria.MissionSearchCriteriaDto;
 import com.lowgistic.mission.service.mapper.MissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,28 +31,6 @@ public class MissionServiceImpl implements MissionService {
         this.missionVerifiers = missionVerifiers;
     }
 
-    /**
-     * @param missionSearchCriteriaDto 
-     * @return
-     */
-    @Override
-    public List<MissionDto> findByCriteria(MissionSearchCriteriaDto missionSearchCriteriaDto) {
-        return null;
-    }
-
-    /**
-     * @param idMission 
-     * @return
-     */
-    @Override
-    public MissionDto findById(Long idMission) {
-        return this.missionMapper.toDto(this.missionRepository.findById(idMission).orElse(null));
-    }
-
-    /**
-     * @param missionDto
-     * @return
-     */
     @Override
     public MissionDto update(MissionDto missionDto) {
         // verify the update of mission condition
@@ -60,15 +39,29 @@ public class MissionServiceImpl implements MissionService {
         return this.missionMapper.toDto(this.missionRepository.save(mission));
     }
 
-    /**
-     * @param missionDto
-     * @return
-     */
     @Override
     public MissionDto create(final MissionDto missionDto) {
         // verify the creation of mission condition
         VerificationUtilsService.verifyConditions(missionDto,this.missionVerifiers.getCreateVerifiers());
         Mission mission = this.missionMapper.toEntity(missionDto);
         return this.missionMapper.toDto(this.missionRepository.save(mission));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MissionDto> findByCompany(final Long companyId) {
+        return this.missionMapper.toDto(this.missionRepository.findByCompanyId(companyId));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MissionDto> findAllForSeller(final Long companyId) {
+        return this.missionMapper.toDto(this.missionRepository.findByCompanyIdNotAndStatus(companyId, EStatus.SUBMITTED));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public MissionDto findById(Long idMission) {
+        return this.missionMapper.toDto(this.missionRepository.findById(idMission).orElse(null));
     }
 }
