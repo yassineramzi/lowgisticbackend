@@ -2,6 +2,7 @@ package com.lowgistic.gateway.config;
 
 import com.lowgistic.gateway.security.AuthenticationManager;
 import com.lowgistic.gateway.security.SecurityContextRepository;
+import com.lowgistic.gateway.security.exception.JwtExpiredTokenException;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,18 +18,27 @@ import reactor.core.publisher.Mono;
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
 public class WebSecurityConfig {
+    private static final String ROLE_ADMIN = "ADMIN";
+
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository;
 
     @Bean
-    public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .exceptionHandling()
-                .authenticationEntryPoint((swe, e) ->
-                        Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED))
-                ).accessDeniedHandler((swe, e) ->
+                .authenticationEntryPoint((swe, e) -> {
+                    if (e.getCause() instanceof JwtExpiredTokenException) {
+                        swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    } else {
+                        swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+                    }
+                    return Mono.empty();
+                })
+                .accessDeniedHandler((swe, e) ->
                         Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))
-                ).and()
+                )
+                .and()
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
@@ -47,21 +57,21 @@ public class WebSecurityConfig {
                 /*
                     API Company
                  */
-                .pathMatchers("/api/management/company/**").permitAll()
+                .pathMatchers("/api/management/company/**").hasRole(ROLE_ADMIN)
                 /*
                     API Mission
                  */
-                .pathMatchers("/api/mission/**").permitAll()
+                .pathMatchers("/api/mission/**").hasRole(ROLE_ADMIN)
                 /*
                     API Mission Response
                  */
-                .pathMatchers("/api/mission-response/**").permitAll()
+                .pathMatchers("/api/mission-response/**").hasRole(ROLE_ADMIN)
                 /*
                     API Countries
                  */
                 .pathMatchers("/api/countries/**").permitAll()
                 /*
-                    Pour tout autre appel l'utilisateur doit être authentifié
+                    Pour tout autre appel, l'utilisateur doit être authentifié
                  */
                 .anyExchange().authenticated()
                 .and().build();

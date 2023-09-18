@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +24,8 @@ public class MissionResponseDto implements Serializable {
     private String storagePeriodCommentary;
     private Long franchiseStoragePeriod;
     private Date createDate;
-    private Long ownerId;
-    private Long missionId;
+    private CompanyDto owner;
     private EStatus status;
     private List<MissionResponseOptionDto> options;
+    private MissionDto mission;
 }

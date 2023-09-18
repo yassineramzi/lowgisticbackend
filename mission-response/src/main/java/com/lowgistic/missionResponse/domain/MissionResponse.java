@@ -49,12 +49,6 @@ public class MissionResponse {
     @Column(name = "create_date")
     private Date createDate;
 
-    @Column(name = "owner_id")
-    private Long ownerId;
-
-    @Column(name = "mission_id")
-    private Long missionId;
-
     @Enumerated(EnumType.STRING)
     @Column(length = 100)
     private EStatus status;
@@ -62,4 +56,12 @@ public class MissionResponse {
     @OneToMany( cascade = CascadeType.ALL )
     @JoinColumn(name = "mission_response_id")
     private List<MissionResponseOption> options;
+
+    @ManyToOne
+    @JoinColumn(name="mission_id", referencedColumnName = "id", updatable = false)
+    private Mission mission;
+
+    @ManyToOne
+    @JoinColumn(name="owner_id", referencedColumnName = "id", updatable = false)
+    private Company owner;
 }

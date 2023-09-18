@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface MissionResponseRepositroy extends JpaRepository<MissionResponse, Long> {
     List<MissionResponse> findByMissionIdAndStatus(Long missionId, EStatus status);
+
+    List<MissionResponse> findByOwnerId(Long companyId);
 }

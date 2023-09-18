@@ -1,19 +1,17 @@
 package com.lowgistic.management.service.impl;
 
-import com.lowgistic.management.domain.Company;
 import com.lowgistic.management.domain.CompanyInformation;
 import com.lowgistic.management.repository.CompanyInformationRepository;
 import com.lowgistic.management.repository.CompanyRepository;
 import com.lowgistic.management.service.CompanyService;
+import com.lowgistic.management.service.dto.CompanyDto;
 import com.lowgistic.management.service.dto.CompanyInformationDto;
 import com.lowgistic.management.service.mapper.CompanyInformationMapper;
+import com.lowgistic.management.service.mapper.SocieteMapper;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
@@ -24,6 +22,8 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyInformationRepository companyInformationRepository;
 
     private final CompanyInformationMapper companyInformationMapper;
+
+    private final SocieteMapper societeMapper;
 
     @Override
     public CompanyInformationDto create(final CompanyInformationDto companyInformationDto, final Long companyId) {
@@ -42,7 +42,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyInformationDto findByCompanyId(final Long companyId) {
+    public CompanyInformationDto findCompanyInformationByCompanyId(final Long companyId) {
         log.info("Find Company information for company : {}", companyId);
         return companyInformationRepository.findByCompanyId(companyId)
                 .map(companyInformation -> {
@@ -50,7 +50,20 @@ public class CompanyServiceImpl implements CompanyService {
                 })
                 .orElseGet(() -> {
                     log.error("No company information found with id: {}", companyId);
-                    return null; // or throw an exception as needed
+                    return null;
+                });
+    }
+
+    @Override
+    public CompanyDto findByCompanyId(final Long companyId) {
+        log.info("Find company information : {}", companyId);
+        return companyRepository.findById(companyId)
+                .map(company -> {
+                    return societeMapper.toDto(company);
+                })
+                .orElseGet(() -> {
+                    log.error("No company found with id: {}", companyId);
+                    return null;
                 });
     }
 }

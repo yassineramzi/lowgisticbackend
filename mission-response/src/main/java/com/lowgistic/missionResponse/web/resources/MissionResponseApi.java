@@ -1,5 +1,6 @@
 package com.lowgistic.missionResponse.web.resources;
 
+import com.lowgistic.missionResponse.exception.CompanyNotFoundException;
 import com.lowgistic.missionResponse.service.MissionResponseService;
 import com.lowgistic.missionResponse.service.dto.MissionResponseDto;
 import com.lowgistic.missionResponse.service.dto.MissionResponseOptionDto;
@@ -19,17 +20,15 @@ public class MissionResponseApi {
     private final MissionResponseService missionResponseService;
 
     @PostMapping("/create")
-    public MissionResponseDto createMission(@RequestBody final MissionResponseDto missionResponseDto, @RequestHeader("X-COMPANY-ID") String companyId) {
-        log.info("Create mission : {} ", missionResponseDto);
-        missionResponseDto.setOwnerId(Long.parseLong(companyId));
-        return missionResponseService.create(missionResponseDto);
+    public MissionResponseDto createMission(@RequestBody final MissionResponseDto missionResponseDto, @RequestHeader("X-COMPANY-ID") String companyId) throws CompanyNotFoundException {
+        log.info("Create mission response : {},  for company : {} ", missionResponseDto, companyId);
+        return missionResponseService.create(missionResponseDto, Long.parseLong(companyId));
     }
 
     @PutMapping("/update")
-    public MissionResponseDto updateMission(@RequestBody final MissionResponseDto missionResponseDto, @RequestHeader("X-COMPANY-ID") String companyId) {
-        log.info("Update mission : {} ", missionResponseDto);
-        missionResponseDto.setOwnerId(Long.parseLong(companyId));
-        return missionResponseService.update(missionResponseDto);
+    public MissionResponseDto updateMission(@RequestBody final MissionResponseDto missionResponseDto, @RequestHeader("X-COMPANY-ID") String companyId) throws CompanyNotFoundException {
+        log.info("Update mission response : {},  for company : {} ", missionResponseDto, companyId);
+        return missionResponseService.update(missionResponseDto, Long.parseLong(companyId));
     }
 
     @GetMapping("/{idMission}/mission")
@@ -38,4 +37,9 @@ public class MissionResponseApi {
         return this.missionResponseService.findByMissionIdAndCompanyId(missionId, Long.parseLong(companyId));
     }
 
+    @GetMapping("/by-company")
+    public List<MissionResponseDto> searchMissionResponsesSubmittedByCompany(@RequestHeader("X-COMPANY-ID") String companyId) {
+        log.info("Search for mission's responses submitted by company  : {}", companyId);
+        return this.missionResponseService.findSubmittedByCompany(Long.parseLong(companyId));
+    }
 }

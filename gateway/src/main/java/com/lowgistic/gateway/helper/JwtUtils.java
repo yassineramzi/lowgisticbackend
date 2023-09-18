@@ -2,7 +2,10 @@ package com.lowgistic.gateway.helper;
 
 import com.lowgistic.gateway.domain.Role;
 import com.lowgistic.gateway.domain.User;
+import com.lowgistic.gateway.security.exception.JwtAuthenticationException;
+import com.lowgistic.gateway.security.exception.JwtExpiredTokenException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -33,7 +36,13 @@ public class JwtUtils {
     private KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS256);
 
     public Claims getAllClaimsFromToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody();
+            try {
+                return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody();
+            } catch (ExpiredJwtException ex) {
+                throw new JwtExpiredTokenException("JWT token has expired");
+            } catch (Exception ex) {
+                throw new JwtAuthenticationException("JWT token validation failed");
+            }
     }
 
     public String getUsernameFromToken(String token) {

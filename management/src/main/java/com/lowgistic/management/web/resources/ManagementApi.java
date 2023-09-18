@@ -2,6 +2,7 @@ package com.lowgistic.management.web.resources;
 
 import com.lowgistic.management.service.CompanyService;
 import com.lowgistic.management.service.UserService;
+import com.lowgistic.management.service.dto.CompanyDto;
 import com.lowgistic.management.service.dto.CompanyInformationDto;
 import com.lowgistic.management.service.dto.UserDto;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,13 @@ public class ManagementApi {
     @GetMapping("/company/company-information")
     public CompanyInformationDto getCompanyInformation(@RequestHeader("X-COMPANY-ID") String companyId) {
         log.info("Find Company information for company : {}", companyId);
+        return companyService.findCompanyInformationByCompanyId(Long.parseLong(companyId));
+    }
+
+
+    @GetMapping("/my-company")
+    public CompanyDto getMyCompany(@RequestHeader("X-COMPANY-ID") String companyId) {
+        log.info("Find my company : {}", companyId);
         return companyService.findByCompanyId(Long.parseLong(companyId));
     }
 }

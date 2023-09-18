@@ -5,7 +5,8 @@ import com.lowgistic.missionResponse.service.dto.MissionResponseDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {
-MissionResponseOptionMapper.class
+        MissionResponseOptionMapper.class,
+        MissionMapper.class
 })
 public interface MissionResponseMapper extends EntityMapper<MissionResponseDto, MissionResponse> {
 
