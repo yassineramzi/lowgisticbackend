@@ -9,4 +9,5 @@
     <include file="db/changelog/management/master/changes/added_entity_Utilisateur_FK.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/management/master/changes/added_entity_Tenant.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/management/master/changes/added_entities_company_information_truck_warehouse.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/management/master/changes/added_entity_company_information_column_logo.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

@@ -26,4 +26,7 @@ public class Company implements Serializable {
 
     private String ice;
 
+    @OneToOne(mappedBy = "company")
+    private CompanyInformation companyInformation;
+
 }

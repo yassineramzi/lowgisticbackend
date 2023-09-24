@@ -22,15 +22,15 @@ public class CompanyInformation implements Serializable {
     private String numeroPoliceAssurance;
     private Integer nombreEmployes;
     private String deviseFacturation;
+    private String logo;
 
-    @OneToMany(mappedBy = "companyInformation", cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL )
+    @JoinColumn(name = "company_information_id")
     private List<Truck> trucks;
 
-    @OneToMany(mappedBy = "companyInformation", cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL )
+    @JoinColumn(name = "company_information_id")
     private List<Warehouse> warehouses;
-
-    @ElementCollection
-    private List<String> routes;
 
     @OneToOne
     @JoinColumn(name="company_id", referencedColumnName = "id")

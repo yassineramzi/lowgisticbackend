@@ -14,7 +14,8 @@ spring:
     bootstrap-servers: lowgistic-kafka:9092
     topic:
       userRegistered: USER_REGISTERED_TOPIC
-
+  codec:
+    max-in-memory-size: 2MB
 management:
   endpoints:
     web:

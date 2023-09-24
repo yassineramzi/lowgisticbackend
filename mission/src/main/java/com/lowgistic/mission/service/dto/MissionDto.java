@@ -14,15 +14,15 @@ import java.util.List;
 @AllArgsConstructor
 public class MissionDto implements Serializable{
     private Long id;
-    private String freightFrom;
-    private String freightTo;
+    private Long freightFrom;
+    private Long freightTo;
     private String freightType;
     private String freightTypeOfGoods;
     private LocalDate freightMissionStartDate;
     private LocalDate freightMissionEndDate;
     private LocalDate warehousingMissionStartDate;
     private LocalDate warehousingMissionEndDate;
-    private String warehousingMissionCity;
+    private Long warehousingMissionCity;
     private String pickupAddress;
     private String pickupContactPersonName;
     private String pickupContactPersonPhone;

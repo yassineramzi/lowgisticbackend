@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
@@ -42,6 +44,23 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public CompanyInformationDto update(final CompanyInformationDto companyInformationDto, final Long companyId) {
+        log.info("Request to update Company Information : {} for company : {}", companyInformationDto, companyId);
+        return companyRepository.findById(companyId)
+                .map(company -> {
+                    CompanyInformation companyInformation = companyInformationMapper.toEntity(companyInformationDto);
+                    companyInformation.setCompany(company);
+                    companyInformation = companyInformationRepository.save(companyInformation);
+                    return companyInformationMapper.toDto(companyInformation);
+                })
+                .orElseGet(() -> {
+                    log.error("No company found with id: {}", companyId);
+                    return null; // or throw an exception as needed
+                });
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public CompanyInformationDto findCompanyInformationByCompanyId(final Long companyId) {
         log.info("Find Company information for company : {}", companyId);
         return companyInformationRepository.findByCompanyId(companyId)
@@ -55,6 +74,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CompanyDto findByCompanyId(final Long companyId) {
         log.info("Find company information : {}", companyId);
         return companyRepository.findById(companyId)

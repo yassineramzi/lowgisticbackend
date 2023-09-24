@@ -32,12 +32,17 @@ public class ManagementApi {
         return companyService.create(companyInformationDto, Long.parseLong(companyId));
     }
 
+    @PutMapping("/company/update-information")
+    public CompanyInformationDto updateCompanyInformation(@RequestBody final CompanyInformationDto companyInformationDto, @RequestHeader("X-COMPANY-ID") String companyId) {
+        log.info("Update Company information : {} for company : {}", companyInformationDto, companyId);
+        return companyService.update(companyInformationDto, Long.parseLong(companyId));
+    }
+
     @GetMapping("/company/company-information")
     public CompanyInformationDto getCompanyInformation(@RequestHeader("X-COMPANY-ID") String companyId) {
         log.info("Find Company information for company : {}", companyId);
         return companyService.findCompanyInformationByCompanyId(Long.parseLong(companyId));
     }
-
 
     @GetMapping("/my-company")
     public CompanyDto getMyCompany(@RequestHeader("X-COMPANY-ID") String companyId) {

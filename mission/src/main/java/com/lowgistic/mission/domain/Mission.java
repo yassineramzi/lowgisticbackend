@@ -18,15 +18,15 @@ public class Mission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String freightFrom;
-    private String freightTo;
+    private Long freightFrom;
+    private Long freightTo;
     private String freightType;
     private String freightTypeOfGoods;
     private Date freightMissionStartDate;
     private Date freightMissionEndDate;
     private Date warehousingMissionStartDate;
     private Date warehousingMissionEndDate;
-    private String warehousingMissionCity;
+    private Long warehousingMissionCity;
     private String pickupAddress;
     private String pickupContactPersonName;
     private String pickupContactPersonPhone;

@@ -17,6 +17,7 @@ public class CompanyInformationDto implements Serializable {
     private String numeroPoliceAssurance;
     private Integer nombreEmployes;
     private String deviseFacturation;
+    private String logo;
     private List<TruckDto> trucks;
     private List<WarehouseDto> warehouses;
     private List<String> routes;

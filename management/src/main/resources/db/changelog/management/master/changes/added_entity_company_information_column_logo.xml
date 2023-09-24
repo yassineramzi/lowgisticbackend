@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!--
+        Modify the entity Company_information
+    -->
+    <changeSet id="add_column_logo_company_information" author="yramzi">
+        <addColumn tableName="company_information">
+            <column name="logo" type="VARCHAR(10485760)">
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

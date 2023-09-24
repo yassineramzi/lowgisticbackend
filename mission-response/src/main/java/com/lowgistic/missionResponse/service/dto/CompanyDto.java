@@ -17,4 +17,6 @@ public class CompanyDto implements Serializable {
     private String adresse;
 
     private String ice;
+
+    private CompanyInformationDto companyInformation;
 }

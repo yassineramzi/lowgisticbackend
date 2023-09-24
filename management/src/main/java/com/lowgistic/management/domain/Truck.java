@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "truck")
+@DynamicUpdate
 public class Truck implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +30,6 @@ public class Truck implements Serializable {
     private boolean cargoPartitions;
     private boolean loadLocks;
     @ManyToOne
+    @JoinColumn(name="company_information_id", referencedColumnName = "id", updatable = false)
     private CompanyInformation companyInformation;
 }

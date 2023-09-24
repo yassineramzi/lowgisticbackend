@@ -27,15 +27,15 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="freight_from" type="varchar(255)"/>
-            <column name="freight_to" type="varchar(255)"/>
+            <column name="freight_from" type="bigint"/>
+            <column name="freight_to" type="bigint"/>
             <column name="freight_type" type="varchar(255)"/>
             <column name="freight_type_of_goods" type="varchar(255)"/>
             <column name="freight_mission_start_date" type="date"/>
             <column name="freight_mission_end_date" type="date"/>
             <column name="warehousing_mission_start_date" type="date"/>
             <column name="warehousing_mission_end_date" type="date"/>
-            <column name="warehousing_mission_city" type="varchar(255)"/>
+            <column name="warehousing_mission_city" type="bigint"/>
             <column name="pickup_address" type="varchar(255)"/>
             <column name="pickup_contact_person_name" type="varchar(255)"/>
             <column name="pickup_contact_person_phone" type="varchar(255)"/>

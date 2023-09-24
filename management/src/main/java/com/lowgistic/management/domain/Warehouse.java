@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "warehouse")
+@DynamicUpdate
 public class Warehouse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +55,6 @@ public class Warehouse implements Serializable {
     private boolean ukwa;
     private boolean cbpSupplyChainSecurity;
     @ManyToOne
+    @JoinColumn(name="company_information_id", referencedColumnName = "id", updatable = false)
     private CompanyInformation companyInformation;
 }
