@@ -20,10 +20,6 @@ public class UserDto implements Serializable {
 
     private String telephone;
 
-    private String pays;
-
-    private String typeProfil;
-
     private String password;
 
     private Set<RoleDto> roles = new HashSet<RoleDto>();

@@ -23,4 +23,8 @@ public class Company implements Serializable {
 
     private String ice;
 
+    @Column(name="type_profil")
+    private String typeProfil;
+
+    private Long countryId;
 }

@@ -34,14 +34,6 @@
             <column name="telephone" type="varchar(25)">
                 <constraints nullable="true"/>
             </column>
-
-            <column name="pays" type="varchar(100)">
-                <constraints nullable="true"/>
-            </column>
-
-            <column name="type_profil" type="varchar(100)">
-                <constraints nullable="true"/>
-            </column>
         </createTable>
     </changeSet>
 

@@ -33,13 +33,8 @@ public class User {
 
     private String telephone;
 
-    private String pays;
-
     private String password;
-
-    @Column(name = "type_profil")
-    private String typeProfil;
-
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "utilisateur_roles",
             joinColumns = @JoinColumn(name = "utilisateur_id"),

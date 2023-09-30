@@ -16,6 +16,8 @@
             <column name="raison_sociale" type="VARCHAR(255)"/>
             <column name="adresse" type="VARCHAR(255)"/>
             <column name="ice" type="VARCHAR(50)"/>
+            <column name="country_id" type="BIGINT"/>
+            <column name="type_profil" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
 
