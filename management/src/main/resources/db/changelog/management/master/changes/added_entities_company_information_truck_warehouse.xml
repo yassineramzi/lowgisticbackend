@@ -27,6 +27,7 @@
             <column name="name" type="VARCHAR(255)"/>
             <column name="address" type="VARCHAR(255)"/>
             <column name="superficie" type="DOUBLE"/>
+            <column name="is_bonded_warehouse" type="BOOLEAN"/>
             <column name="security247" type="BOOLEAN"/>
             <column name="access247" type="BOOLEAN"/>
             <column name="bunded" type="BOOLEAN"/>

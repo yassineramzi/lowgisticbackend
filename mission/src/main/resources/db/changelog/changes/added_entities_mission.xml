@@ -61,6 +61,7 @@
             <column name="status" type="varchar(100)"/>
             <column name="is_warehouse_mission" type="boolean"/>
             <column name="is_freight_mission" type="boolean"/>
+            <column name="freight_vehicle_type" type="varchar(100)"/>
         </createTable>
     </changeSet>
 

@@ -27,4 +27,7 @@ public class Company implements Serializable {
     private String typeProfil;
 
     private Long countryId;
+
+    @OneToOne(mappedBy = "company")
+    private CompanyInformation companyInformation;
 }

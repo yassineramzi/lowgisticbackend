@@ -2,6 +2,7 @@ package com.lowgistic.mission.domain;
 
 import com.lowgistic.mission.enums.EStatus;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -61,5 +62,8 @@ public class Mission {
     private EStatus status;
     private boolean isWarehouseMission;
     private boolean isFreightMission;
+    private String freightVehicleType;
+    @OneToOne(cascade=CascadeType.ALL, mappedBy = "mission")
+    private MissionWarehouseOption missionWarehouseOption;
 }
 

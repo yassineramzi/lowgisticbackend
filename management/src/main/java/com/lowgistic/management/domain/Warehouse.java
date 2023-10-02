@@ -23,6 +23,7 @@ public class Warehouse implements Serializable {
     private String name;
     private String address;
     private Double superficie;
+    private boolean isBondedWarehouse;
     private boolean security247;
     private boolean access247;
     private boolean bunded;

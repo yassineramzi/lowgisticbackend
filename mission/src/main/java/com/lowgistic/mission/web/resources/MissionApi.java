@@ -55,8 +55,8 @@ public class MissionApi {
     }
 
     @PostMapping("/search-for-seller")
-    public List<MissionDto> searchMissionsForSeller(@RequestHeader("X-COMPANY-ID") String companyId) {
-        log.info("Search for seller mission : {} ", companyId);
-        return missionService.findAllForSeller(Long.parseLong(companyId));
+    public List<MissionDto> searchMissionsForSeller(@RequestHeader("X-COMPANY-ID") String companyId, @RequestBody MissionSearchCriteriaDto missionSearchCriteriaDto) {
+        log.info("Search for seller mission : {} with criteria : {} ", companyId, missionSearchCriteriaDto);
+        return missionService.findForSellerByCriteria(Long.parseLong(companyId), missionSearchCriteriaDto);
     }
 }

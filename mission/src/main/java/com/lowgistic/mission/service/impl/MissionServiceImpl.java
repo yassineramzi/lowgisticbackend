@@ -7,6 +7,7 @@ import com.lowgistic.mission.service.MissionService;
 import com.lowgistic.mission.service.conditions.utils.VerificationUtilsService;
 import com.lowgistic.mission.service.conditions.verifiers.impl.MissionVerifiers;
 import com.lowgistic.mission.service.dto.MissionDto;
+import com.lowgistic.mission.service.dto.searchCriteria.MissionSearchCriteriaDto;
 import com.lowgistic.mission.service.mapper.MissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,8 +56,8 @@ public class MissionServiceImpl implements MissionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MissionDto> findAllForSeller(final Long companyId) {
-        return this.missionMapper.toDto(this.missionRepository.findByCompanyIdNotAndStatus(companyId, EStatus.SUBMITTED));
+    public List<MissionDto> findForSellerByCriteria(Long idCompanySeller, MissionSearchCriteriaDto missionSearchCriteriaDto) {
+        return this.missionMapper.toDto(this.missionRepository.findAll(MissionSpecifications.filterMissions(missionSearchCriteriaDto, idCompanySeller)));
     }
 
     @Override

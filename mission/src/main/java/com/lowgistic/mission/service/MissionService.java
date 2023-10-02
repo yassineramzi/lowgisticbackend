@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface MissionService {
     List<MissionDto> findByCompany(Long idCompany);
-
-    List<MissionDto> findAllForSeller(Long idCompanySeller);
+    List<MissionDto> findForSellerByCriteria(Long idCompanySeller, MissionSearchCriteriaDto missionSearchCriteriaDto);
     MissionDto findById(final Long idMission);
     MissionDto update(final MissionDto MissionDto);
     MissionDto create(final MissionDto MissionDto);

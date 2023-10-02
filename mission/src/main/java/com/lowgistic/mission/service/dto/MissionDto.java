@@ -49,5 +49,7 @@ public class MissionDto implements Serializable{
     private EStatus status;
     private boolean isWarehouseMission;
     private boolean isFreightMission;
+    private String freightVehicleType;
+    private MissionWarehouseOptionDto missionWarehouseOption;
 }
 

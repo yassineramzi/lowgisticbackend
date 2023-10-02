@@ -20,4 +20,6 @@ public class CompanyDto implements Serializable {
     private String typeProfil;
 
     private Long countryId;
+
+    private CompanyInformationDto companyInformation;
 }

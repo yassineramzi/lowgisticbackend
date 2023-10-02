@@ -1,0 +1,48 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Add table mission_warehouse_option -->
+    <changeSet id="create_mission_warehouse_option_table" author="yramzi">
+        <createTable tableName="mission_warehouse_option">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="superficie_min" type="DOUBLE"/>
+            <column name="is_bonded_warehouse" type="BOOLEAN"/>
+            <column name="security247" type="BOOLEAN"/>
+            <column name="access247" type="BOOLEAN"/>
+            <column name="bunded" type="BOOLEAN"/>
+            <column name="caged" type="BOOLEAN"/>
+            <column name="sprinklered" type="BOOLEAN"/>
+            <column name="alarmed" type="BOOLEAN"/>
+            <column name="patrolled" type="BOOLEAN"/>
+            <column name="fenced_yard" type="BOOLEAN"/>
+            <column name="cctv" type="BOOLEAN"/>
+            <column name="esft" type="BOOLEAN"/>
+            <column name="bulk_powder" type="BOOLEAN"/>
+            <column name="hazardous_chemicals" type="BOOLEAN"/>
+            <column name="bulk_liquid" type="BOOLEAN"/>
+            <column name="high_value" type="BOOLEAN"/>
+            <column name="lme" type="BOOLEAN"/>
+            <column name="wet_bonded" type="BOOLEAN"/>
+            <column name="dry_bonded" type="BOOLEAN"/>
+            <column name="container" type="BOOLEAN"/>
+            <column name="out_door" type="BOOLEAN"/>
+            <column name="rf_technology" type="BOOLEAN"/>
+            <column name="counter_balance" type="BOOLEAN"/>
+            <column name="crane" type="BOOLEAN"/>
+            <column name="reach_truck" type="BOOLEAN"/>
+            <column name="trailer_parking" type="BOOLEAN"/>
+            <column name="brc" type="BOOLEAN"/>
+            <column name="organic_food_fed" type="BOOLEAN"/>
+            <column name="mhra" type="BOOLEAN"/>
+            <column name="organic_farmers" type="BOOLEAN"/>
+            <column name="soil" type="BOOLEAN"/>
+            <column name="ukwa" type="BOOLEAN"/>
+            <column name="cbp_supply_chain_security" type="BOOLEAN"/>
+            <column name="mission_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

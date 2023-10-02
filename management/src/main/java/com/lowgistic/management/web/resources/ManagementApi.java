@@ -49,4 +49,10 @@ public class ManagementApi {
         log.info("Find my company : {}", companyId);
         return companyService.findByCompanyId(Long.parseLong(companyId));
     }
+
+    @GetMapping("/{id}")
+    public CompanyDto getCompanyById(@PathVariable("id") final Long companyId) {
+        log.info("Find company by id : {}", companyId);
+        return companyService.findByCompanyId(companyId);
+    }
 }

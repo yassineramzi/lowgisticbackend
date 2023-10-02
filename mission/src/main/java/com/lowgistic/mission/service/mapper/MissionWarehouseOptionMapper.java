@@ -1,24 +1,24 @@
 package com.lowgistic.mission.service.mapper;
 
-import com.lowgistic.mission.domain.MissionOption;
-import com.lowgistic.mission.service.dto.MissionOptionDto;
+import com.lowgistic.mission.domain.MissionWarehouseOption;
+import com.lowgistic.mission.service.dto.MissionWarehouseOptionDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface MissionOptionMapper extends EntityMapper<MissionOptionDto, MissionOption> {
+public interface MissionWarehouseOptionMapper extends EntityMapper<MissionWarehouseOptionDto, MissionWarehouseOption> {
 
     @Override
-    MissionOptionDto toDto(MissionOption missionOption);
+    MissionWarehouseOptionDto toDto(MissionWarehouseOption missionWarehouseOption);
 
     @Override
-    MissionOption toEntity(MissionOptionDto missionOptionDto);
+    MissionWarehouseOption toEntity(MissionWarehouseOptionDto missionWarehouseOptionDto);
 
-    default MissionOption fromId(Long id) {
+    default MissionWarehouseOption fromId(Long id) {
         if (id == null) {
             return null;
         }
-        MissionOption missionOption = new MissionOption();
-        missionOption.setId(id);
-        return missionOption;
+        MissionWarehouseOption missionWarehouseOption = new MissionWarehouseOption();
+        missionWarehouseOption.setId(id);
+        return missionWarehouseOption;
     }
 }

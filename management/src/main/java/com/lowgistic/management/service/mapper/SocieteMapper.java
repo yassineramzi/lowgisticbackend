@@ -4,7 +4,7 @@ import com.lowgistic.management.domain.Company;
 import com.lowgistic.management.service.dto.CompanyDto;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, CompanyInformationMapper.class})
 public interface SocieteMapper extends EntityMapper<CompanyDto, Company>{
     @Override
     CompanyDto toDto(Company Societe);

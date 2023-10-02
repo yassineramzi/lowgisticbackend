@@ -7,5 +7,6 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <include file="db/changelog/changes/added_entities_mission.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/changes/load_mission_options.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/changes/added_entity_mission_warehouse_option.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
 
