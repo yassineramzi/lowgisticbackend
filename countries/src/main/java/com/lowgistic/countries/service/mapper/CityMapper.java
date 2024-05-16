@@ -1,7 +1,7 @@
-package com.lowgistic.mission.service.mapper;
+package com.lowgistic.countries.service.mapper;
 
-import com.lowgistic.mission.domain.City;
-import com.lowgistic.mission.service.dto.CityDto;
+import com.lowgistic.countries.domain.City;
+import com.lowgistic.countries.service.dto.CityDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

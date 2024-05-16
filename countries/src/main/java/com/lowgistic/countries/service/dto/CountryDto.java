@@ -1,20 +1,17 @@
-package com.lowgistic.mission.domain;
+package com.lowgistic.countries.service.dto;
 
-import lombok.*;
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Entity
-@Table(name = "country")
-public class Country implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CountryDto implements Serializable{
     private Long id;
 
     private String name;
@@ -36,5 +33,5 @@ public class Country implements Serializable {
     private String currencyName;
 
     private String currencySymbol;
-
 }
+

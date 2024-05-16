@@ -1,4 +1,4 @@
-package com.lowgistic.mission.service.mapper;
+package com.lowgistic.countries.service.mapper;
 
 import java.util.List;
 

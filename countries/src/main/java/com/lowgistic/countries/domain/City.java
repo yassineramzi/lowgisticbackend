@@ -1,4 +1,4 @@
-package com.lowgistic.mission.domain;
+package com.lowgistic.countries.domain;
 
 import lombok.*;
 

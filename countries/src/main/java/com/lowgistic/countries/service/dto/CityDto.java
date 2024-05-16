@@ -1,4 +1,4 @@
-package com.lowgistic.mission.service.dto;
+package com.lowgistic.countries.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

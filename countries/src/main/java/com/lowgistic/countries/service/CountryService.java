@@ -1,6 +1,6 @@
-package com.lowgistic.mission.service;
+package com.lowgistic.countries.service;
 
-import com.lowgistic.mission.service.dto.CountryDto;
+import com.lowgistic.countries.service.dto.CountryDto;
 
 import java.util.List;
 

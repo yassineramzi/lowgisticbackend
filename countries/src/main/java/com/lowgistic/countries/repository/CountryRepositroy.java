@@ -1,8 +1,7 @@
-package com.lowgistic.mission.repository;
+package com.lowgistic.countries.repository;
 
-import com.lowgistic.mission.domain.Country;
+import com.lowgistic.countries.domain.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

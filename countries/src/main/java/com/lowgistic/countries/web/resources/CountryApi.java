@@ -1,9 +1,9 @@
-package com.lowgistic.mission.web.resources;
+package com.lowgistic.countries.web.resources;
 
-import com.lowgistic.mission.service.CityService;
-import com.lowgistic.mission.service.CountryService;
-import com.lowgistic.mission.service.dto.CityDto;
-import com.lowgistic.mission.service.dto.CountryDto;
+import com.lowgistic.countries.service.CityService;
+import com.lowgistic.countries.service.CountryService;
+import com.lowgistic.countries.service.dto.CityDto;
+import com.lowgistic.countries.service.dto.CountryDto;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,4 +33,15 @@ public class CountryApi {
         return cityService.findByCountryIdAndNameLike(idCountry, cityName);
     }
 
+    @GetMapping("/cities/{cityName}")
+    public List<CityDto> findCitiesByNameLike(@PathVariable("cityName") final String cityName) {
+        log.info("Find cities by name like : {}", cityName);
+        return cityService.findByNameLike(cityName);
+    }
+
+    @GetMapping("/cities/{id}")
+    public CityDto findCityById(@PathVariable("id") final Long cityId) {
+        log.info("Find city by id : {}", cityId);
+        return cityService.findById(cityId);
+    }
 }

@@ -1,10 +1,10 @@
-package com.lowgistic.mission.service.impl;
+package com.lowgistic.countries.service.impl;
 
-import com.lowgistic.mission.repository.CountryRepositroy;
-import com.lowgistic.mission.service.CountryService;
+import com.lowgistic.countries.repository.CountryRepositroy;
+import com.lowgistic.countries.service.CountryService;
 
-import com.lowgistic.mission.service.dto.CountryDto;
-import com.lowgistic.mission.service.mapper.CountryMapper;
+import com.lowgistic.countries.service.dto.CountryDto;
+import com.lowgistic.countries.service.mapper.CountryMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
