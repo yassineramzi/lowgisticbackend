@@ -60,4 +60,4 @@ Make a pull request to develop by specifying the other developers for a code rev
 
 Then type password :
 
-    lowgistic_p@5sWord
+    <password>
